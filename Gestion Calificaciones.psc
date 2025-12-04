@@ -1,0 +1,99 @@
+Proceso Gestion_Calificaciones
+	// --- Paso 1: Definició de Variables y Arreglos ---
+	
+	// 1. Definimos las variables que usaremos
+	Definir  cantidad_estudiantes Como Entero;
+	Definir i Como Entero; //Esta variable 'i' nos servirá como contador en los ciclos
+	Definir suma_notas, promedio Como Real;
+	
+	// 2. Definimos los tipos de datos para nuestros arreglos
+	Definir nombres Como Caracter;
+	Definir notas Como Real;
+	
+	// 3. Inicializamos la cantidad de estudiantes
+	cantidad_estudiantes <- 5;
+	
+	// 4. Dimensionamos los vectores (Arreglos)
+	// Esto le dice al programa: "Reserva 5 espacios para nombres y 5 notas"
+	Dimension nombres[cantidad_estudiantes];
+	Dimension notas[cantidad_estudiantes];
+	
+	Escribir "--- Sistema de Calificaciones Inicializado ---";
+	Escribir "Capacidad para: ", cantidad_estudiantes, " estudiantes.";
+	Escribir "------------------------------------------------";
+	
+	// --- Paso 2: Menú Principal ---
+	
+	Repetir
+		//Limpiar Pantalla;
+		Escribir "===================================";
+		Escribir "     GESTIÓN DE CALIFICACIONES     ";
+		Escribir "===================================";
+		Escribir "1. Ingresar Datos de Estudiantes";
+		Escribir "2. Mostrar Listado de Notas";
+		Escribir "3. Calcular Promedio del Curso";
+		Escribir "4. Salir";
+		Escribir "===================================";
+		Escribir "Elige una opción: ";
+		Leer opcion;
+		
+		//Estructura para manejar la elección
+		Segun opcion Hacer
+			1: Escribir "--- IGRESO DE DATOS---";
+				//Ciclo Para: i empieza en 1 y termina en 5
+				Para i <- 1 Hasta cantidad_estudiantes Con Paso 1 Hacer
+					Escribir "Ingrese nombre del estudiante ", i, ":";
+					Leer nombres[i]; //Guarda el nombre en la posición i
+					
+					Escribir "Ingrese la nota de ", nombres[i], ":";
+					Leer notas[i]; // Guarda la nota en la misma posición i
+					
+					Escribir "--------------------";
+				FinPara
+				Escribir "¡Datos guardados correctamente!";
+			2: Escribir "--- LISTADO DE ESTUDIANTES ---";
+				//Recorremos los vectores desde la posición 1 hasta la 5
+				Para i <- 1 Hasta cantidad_estudiantes Con Paso 1 Hacer
+					
+					//Mostrar el nombre y la notas
+					Escribir "Estudiante: ", nombres[i];
+					Escribir "Nota: ", notas[i];
+					
+					// ---LÓGICA CONDICIONAL ---
+					// Verificar si la nota es suficiente para aprobar
+					Si notas[i] >= 6.0 Entonces
+						Escribir "Estado: APROBADO";
+					SiNo
+						Escribir "Estado: REPROBADO";
+					FinSi
+					
+					Escribir "--------------------";
+				FinPara
+				
+				Escribir "Fin del listado.";
+			3: Escribir "--- PROMEDIO DEL CURSO---";
+				
+				//1. Inicializamos el acumulador en 0
+				suma_notas <- 0;
+				
+				//2. Sumamos todas las notas
+				Para i <- 1 Hasta cantidad_estudiantes Con Paso 1 Hacer
+					suma_notas <- suma_notas + notas[i];
+					// Esto dice: "Lo que ya tengo en suma, más la nueva nota"
+				FinPara
+				
+				//3. Calculamos el promedio
+				promedio <- suma_notas / cantidad_estudiantes;
+				
+				Escribir "La suma de todas las notas es: ", suma_notas;
+				Escribir "El promedio general del curso es: ", promedio;
+			4: Escribir "Saliendo del sistema...";
+			De Otro Modo:
+				Escribir "Opción no válida. Intenta de nuevo.";
+		FinSegun
+		
+		Escribir ""; //Salto de línea
+		
+	Hasta Que opcion = 4
+	
+FinProceso
